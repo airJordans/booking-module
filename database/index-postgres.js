@@ -54,7 +54,7 @@ const getMaxPrice = function getMaxPrice(listingId, callback) {
 };
 
 // SELECT id, begin_date, cost_per_night FROM listing_daily_prices WHERE listing_id = 9999800 AND begin_date < '2018-09-28';
-const getPricingDataForDateRange = (listingId, beginDate, endDate, callback) => {
+const getPricingDataForDateRange = (listingId, endDate, callback) => {
   const query = `SELECT id, begin_date, cost_per_night
     FROM listing_daily_prices
     WHERE listing_id = ${listingId}
@@ -71,19 +71,21 @@ const getPricingDataForDateRange = (listingId, beginDate, endDate, callback) => 
   });
 };
 
+// INSERT INTO reservations(listing_id,begin_date,end_date) VALUES(8234343,'2018-03-22','2018-03-24');
 const addReservation = (listingId, beginDate, endDate, callback) => {
   const query = `INSERT INTO reservations(listing_id,begin_date,end_date)
-    VALUES(${listingId},${beginDate},${endDate})`;
-
+    VALUES(${listingId},'${beginDate}','${endDate}');`;
+  
   connection.query(query, (err, results) => {
     if (err) callback(err, null);
     else callback(null, results);
   });
 };
 
+// UPDATE reservations SET begin_date='2018-08-22',end_date='2018-08-24' WHERE id=32342349;
 const updateReservation = (reservationId, beginDate, endDate, callback) => {
-  const query = `UPDATE reservations SET begin_date=${beginDate},
-  end_date=${endDate} WHERE id=${reservationId}`;
+  const query = `UPDATE reservations SET begin_date='${beginDate}',
+  end_date='${endDate}' WHERE id=${reservationId}`;
 
   connection.query(query, (err, results) => {
     if (err) callback(err, null);
@@ -91,6 +93,7 @@ const updateReservation = (reservationId, beginDate, endDate, callback) => {
   });
 };
 
+// DELETE FROM reservations WHERE id=9329440;
 const deleteReservation = (reservationId, callback) => {
   const query = `DELETE FROM reservations WHERE id=${reservationId}`;
 
