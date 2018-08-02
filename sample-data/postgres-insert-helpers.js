@@ -21,11 +21,11 @@ for (let i = 0; i < 100; i += 1) {
   fs.appendFileSync('./listings.csv', listings);
 }
 
-// add reservations to csv
+// // add reservations to csv
 fs.writeFileSync('./reservations.csv', '');
 
 let reservations = [];
-for (let i = 0; i < 10000000; i += 1) {
+for (let i = 1; i <= 10000000; i += 1) {
   let reservation = generateReservation(i);
   reservation = reservation.join('\n');
   reservations.push(reservation);
@@ -37,10 +37,11 @@ for (let i = 0; i < 10000000; i += 1) {
   }
 }
 
-// add dailyPrices to csv
+// // add dailyPrices to csv
+
 fs.writeFileSync('./dailyPrices.csv', '');
 let dailyPrices = [];
-for (let i = 0; i < 10000000; i += 1) {
+for (let i = 1; i <= 10000000; i += 1) {
   let dailyPrice = generateDailyPrices(i);
   dailyPrice = dailyPrice.join('\n');
   dailyPrices.push(dailyPrice);
